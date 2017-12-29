@@ -10,6 +10,8 @@ RUN apt-get update \
     curl \
     git \
     locales \
+    nodejs \
+    npm \
     tmux \
     vim \
     zsh \

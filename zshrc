@@ -123,6 +123,11 @@ md() {
   mkdir -p "$@" && cd "$@"
 }
 
+# create a new JavaScript-project with Git and NPM
+jsinit() {
+  md "$@" && git init && npm init
+}
+
 
 ################
 # ALIASES      #
