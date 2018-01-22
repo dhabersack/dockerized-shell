@@ -13,6 +13,7 @@ RUN apt-get update \
     nodejs \
     npm \
     tmux \
+    tree \
     vim \
     zsh \
  # set locales
@@ -40,7 +41,13 @@ RUN apt-get update \
  && git clone https://github.com/scrooloose/nerdtree \
  && git clone https://github.com/tomtom/tcomment_vim \
  && git clone https://github.com/tpope/vim-fugitive \
- && git clone https://github.com/tpope/vim-surround
+ && git clone https://github.com/tpope/vim-surround \
+ # change back to home directory (to not mess up following commands)
+ && cd /home/dom \
+ # create directory to mount volumes at
+ && mkdir app \
+ # set permission on entire home-directory
+ && chown -R dom:dom /home/dom
 
 # switch to new user and their home directory
 USER dom
@@ -54,18 +61,5 @@ COPY --chown=dom:dom tmux.conf .tmux.conf
 COPY --chown=dom:dom vimrc .vimrc
 COPY --chown=dom:dom zshrc .zshrc
 
-# Jump straight into tmux-session
+# jump straight into tmux-session
 ENTRYPOINT ["tmux", "new-session", "-s", "islovely"]
-
-# Install docker
-# RUN apt-get update && apt-get install -y \
-#     apt-transport-https \
-#     ca-certificates \
-#     curl \
-#     software-properties-common
-# RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-# RUN add-apt-repository \
-#    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-#    $(lsb_release -cs) \
-#    stable"
-# RUN apt-get update && apt-get install -y docker-ce
