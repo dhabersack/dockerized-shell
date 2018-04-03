@@ -10,12 +10,14 @@ RUN apt-get update \
     curl \
     git \
     locales \
-    nodejs \
-    npm \
     tmux \
     tree \
     vim \
     zsh \
+ #apt-get install -y gnupg \ 
+ # install newer version of Node.js than available otherwise
+ && curl -sL https://deb.nodesource.com/setup_9.x | bash - \ 
+ && apt-get install -y nodejs \ 
  # set locales
  && locale-gen en_US.UTF-8 \
  # set default shell to be zsh
