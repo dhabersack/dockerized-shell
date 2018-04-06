@@ -48,6 +48,8 @@ RUN apt-get update \
  && cd /home/dom \
  # create directory to mount volumes at
  && mkdir app \
+ # create directory to install NPM-packages globally _for this user_
+ && mkdir .npm-packages \
  # set permission on entire home-directory
  && chown -R dom:dom /home/dom
 
@@ -58,6 +60,7 @@ WORKDIR /home/dom
 # copy configuration files
 COPY --chown=dom:dom gitconfig .gitconfig
 COPY --chown=dom:dom gitignore_global .gitignore_global
+COPY --chown=dom:dom npmrc .npmrc
 COPY --chown=dom:dom ssh-install.sh ssh-install.sh
 COPY --chown=dom:dom tmux.conf .tmux.conf
 COPY --chown=dom:dom vimrc .vimrc
